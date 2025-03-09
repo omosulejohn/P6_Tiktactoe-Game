@@ -1,5 +1,6 @@
 # Build stage
-FROM alpine:latest AS build       #node:20-alpine AS build
+FROM node:20-alpine AS build
+RUN apk update && apk upgrade && apk add --no-cache libxml2
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
