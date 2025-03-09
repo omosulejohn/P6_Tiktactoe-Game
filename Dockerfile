@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine AS build
+FROM node:debian AS build
 RUN apk update && apk upgrade && apk add --no-cache libxml2
 WORKDIR /app
 COPY package*.json ./
@@ -8,7 +8,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine
+FROM nginx:debian
 COPY --from=build /app/dist /usr/share/nginx/html
 # Add nginx configuration if needed
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
