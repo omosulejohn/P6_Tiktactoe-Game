@@ -1,3 +1,9 @@
+# Use Alpine as the base image
+FROM alpine:latest
+
+# Update package index and upgrade all packages
+RUN apk update && apk upgrade && apk add --no-cache libxml2
+
 # Build stage
 FROM node:20-alpine AS build
 WORKDIR /app
